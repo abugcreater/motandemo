@@ -35,6 +35,15 @@
             <scope>test</scope>
         </dependency>
 
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <!-- same version with the zookeeper-->
+                <version>3.4.10</version>
+            </dependency>
+
+
+
     </dependencies>
 
     <build>

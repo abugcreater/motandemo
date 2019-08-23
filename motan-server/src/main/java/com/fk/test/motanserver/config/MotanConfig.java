@@ -1,7 +1,5 @@
 package com.fk.test.motanserver.config;
 
-import com.fk.test.motanserver.server.HelloService;
-import com.fk.test.motanserver.server.impl.HelloServiceImpl;
 import com.weibo.api.motan.config.springsupport.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,9 +35,9 @@ public class MotanConfig {
     @Bean(name = "registryConfig1")
     public RegistryConfigBean registryConfig() {
         RegistryConfigBean config = new RegistryConfigBean();
-        config.setRegProtocol("local");
-//        config.setName("sdzz_zookeeper");
-//        config.setAddress("127.0.0.1:2181");
+        config.setRegProtocol("zookeeper");
+        config.setName("sdzz_zookeeper");
+        config.setAddress("127.0.0.1:2181");
         return config;
     }
 
