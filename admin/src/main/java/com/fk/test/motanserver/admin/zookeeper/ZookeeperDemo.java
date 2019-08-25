@@ -23,10 +23,21 @@ public class ZookeeperDemo implements Watcher {
     //闭锁
     private CountDownLatch countDownLatch = new CountDownLatch(1);
 
+    //利用watch机制读取配置
     @Override
     public void process(WatchedEvent watchedEvent) {
         if (watchedEvent.getState() == Event.KeeperState.SyncConnected) {
             System.out.println("Watch received event");
+            try {
+                if(zooKeeper.exists("/zk", this) != null){
+                    byte[] data = zooKeeper.getData("/zk", this, null);
+                    System.out.println("data" + new String(data));
+                }
+            } catch (KeeperException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //满足条件释放
             countDownLatch.countDown();
         }
@@ -137,7 +148,8 @@ public class ZookeeperDemo implements Watcher {
     public static void main(String[] args) throws Exception {
         ZookeeperDemo zookeeperDemo = new ZookeeperDemo();
         zookeeperDemo.connectZookeeper("127.0.0.1:2181");
-        zookeeperDemo.createNode("/zk", "ddd");
+        zookeeperDemo.createNode("/zk1", "ddd");
+        zookeeperDemo.createNode("/zk1/zk2", "ddd");
         List<String> children = zookeeperDemo.getChildren("/");
         System.out.println(children);
         System.out.println("================================================");
