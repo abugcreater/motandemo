@@ -1,5 +1,8 @@
 package com.fk.test.motanserver.admin.lambda;
 
+import org.junit.Test;
+
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 /**
@@ -36,6 +39,14 @@ public class CurryDemo {
                 }
             }
         }
+    }
+
+    @Test
+    public void test(){
+        AtomicInteger atomicInteger = new AtomicInteger(5);
+        atomicInteger.getAndSet(6);
+        System.out.println(atomicInteger);
+
     }
 }
 
